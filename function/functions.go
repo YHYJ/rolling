@@ -25,7 +25,7 @@ var fileName = "/var/log/pacman.log"
 
 // 程序信息
 var (
-	name    string = "rolling"
+	name    string = "Rolling"
 	version   string = "v0.1.3"
 )
 
@@ -147,7 +147,6 @@ func RunCommand(command, args string) string {
 
 // 输出程序名称
 func ProgramName() string {
-	name := name
 	return name
 }
 
