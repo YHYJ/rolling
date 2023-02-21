@@ -14,7 +14,7 @@ import "fmt"
 // 程序信息
 var (
 	name    string = "Rolling"
-	version string = "v0.1.5"
+	version string = "v0.1.6"
 )
 
 // 输出程序名称
