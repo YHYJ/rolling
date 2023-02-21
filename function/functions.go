@@ -59,7 +59,7 @@ func ReadFileLine(file string, line int) string {
 	defer text.Close()
 	// 处理错误
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	// 行计数
 	count := 1
@@ -83,7 +83,7 @@ func ReadFileKey(file, key string) string {
 	defer text.Close()
 	// 处理错误
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	// 创建一个扫描器对象按行遍历
 	scanner := bufio.NewScanner(text)
@@ -104,7 +104,7 @@ func ReadFileCount(file, key string) int {
 	defer text.Close()
 	// 处理错误
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	// 计数器
 	count := 0
@@ -133,7 +133,7 @@ func RunCommand(command, args string) string {
 	outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
 
 	if err != nil {
-		log.Fatalf("Run failed with %s\n", errStr)
+		log.Printf("Run failed with %s", errStr)
 	}
 
 	return strings.TrimRight(outStr, "\n")
