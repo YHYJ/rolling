@@ -18,7 +18,7 @@ import (
 // 在没有任何子命令的情况下调用时的基本命令
 var rootCmd = &cobra.Command{
 	Use:   "rolling",
-	Short: "用于统计系统安装和更新信息",
+	Short: "用于统计并输出系统安装和更新信息",
 	Long: `Rolling是适用于Arch Linux的CLI工具
 该程序用于统计并输出系统安装和更新信息`,
 	// Uncomment the following line if your bare application
