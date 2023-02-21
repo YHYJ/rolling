@@ -138,6 +138,7 @@ func RunCommand(command, args string) string {
 
 	return strings.TrimRight(outStr, "\n")
 }
+
 // 输出系统信息
 func SystemInfo() {
 	fmt.Printf("\033[36m[%16v]\033[0m %-2v \033[36m[%-16v]\033[0m\n", startTimeStr, "--", currentTimeStr)
