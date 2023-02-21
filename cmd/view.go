@@ -27,6 +27,5 @@ var viewCmd = &cobra.Command{
 
 func init() {
 	viewCmd.Flags().BoolP("help", "h", false, "Help for view")
-
 	rootCmd.AddCommand(viewCmd)
 }
