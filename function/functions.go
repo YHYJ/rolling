@@ -26,8 +26,8 @@ var fileName = "/var/log/pacman.log"
 // 程序信息
 var (
 	name    string = "rolling"
-	major   string = "0.1.0"
-	minor   string = "20230216"
+	major   string = "0.1.1"
+	minor   string = "20230221"
 	release string = "1"
 )
 
