@@ -26,7 +26,7 @@ var fileName = "/var/log/pacman.log"
 // 程序信息
 var (
 	name    string = "Rolling"
-	version   string = "v0.1.3"
+	version   string = "v0.1.4"
 )
 
 // 获取系统安装时间和当前时间
