@@ -22,9 +22,8 @@ var versionCmd = &cobra.Command{
 	Short: "打印程序版本",
 	Long:  `显示版本信息并退出`,
 	Run: func(cmd *cobra.Command, args []string) {
-		name := function.ProgramName()
-		version := function.ProgramVersion()
-		fmt.Printf("\033[1m%s\033[0m %s \033[1m%s\033[0m\n", name, "version", version)
+		programInfo := function.ProgramInfo()
+		fmt.Printf(programInfo)
 	},
 }
 

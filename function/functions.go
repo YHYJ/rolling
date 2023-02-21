@@ -23,12 +23,6 @@ import (
 // 检索的Pacman日志文件
 var fileName = "/var/log/pacman.log"
 
-// 程序信息
-var (
-	name    string = "Rolling"
-	version   string = "v0.1.4"
-)
-
 // 获取系统安装时间和当前时间
 var lineText = ReadFileLine(fileName, 1)
 var startTimeStrLong = strings.Split(lineText, " [")[0]
@@ -144,17 +138,6 @@ func RunCommand(command, args string) string {
 
 	return strings.TrimRight(outStr, "\n")
 }
-
-// 输出程序名称
-func ProgramName() string {
-	return name
-}
-
-// 输出程序版本
-func ProgramVersion() string {
-	return version
-}
-
 // 输出系统信息
 func SystemInfo() {
 	fmt.Printf("\033[36m[%16v]\033[0m %-2v \033[36m[%-16v]\033[0m\n", startTimeStr, "--", currentTimeStr)
