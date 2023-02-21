@@ -26,9 +26,7 @@ var fileName = "/var/log/pacman.log"
 // 程序信息
 var (
 	name    string = "rolling"
-	major   string = "0.1.1"
-	minor   string = "20230221"
-	release string = "1"
+	version   string = "v0.1.2"
 )
 
 // 获取系统安装时间和当前时间
@@ -155,7 +153,6 @@ func ProgramName() string {
 
 // 输出程序版本
 func ProgramVersion() string {
-	version := major + "." + minor + "-" + release
 	return version
 }
 
