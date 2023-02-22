@@ -1,10 +1,10 @@
 /*
-File: functions.go
+File: view.go
 Author: YJ
 Email: yj1516268@outlook.com
 Created Time: 2023-02-15 10:24:11
 
-Description: 自定义功能函数
+Description: 子命令`view`功能函数
 */
 
 package function
