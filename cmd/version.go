@@ -11,9 +11,9 @@ package cmd
 
 import (
 	"fmt"
-	"rolling/function"
 
 	"github.com/spf13/cobra"
+	"github.com/yhyj/rolling/function"
 )
 
 // versionCmd represents the version command

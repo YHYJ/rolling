@@ -1,4 +1,4 @@
-module rolling
+module github.com/yhyj/rolling
 
 go 1.20
 

@@ -9,7 +9,7 @@ Description: 主函数
 
 package main
 
-import "rolling/cmd"
+import "github.com/yhyj/rolling/cmd"
 
 func main() {
 	cmd.Execute()

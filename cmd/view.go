@@ -10,9 +10,8 @@ Description: 程序子命令'view'时执行
 package cmd
 
 import (
-	"rolling/function"
-
 	"github.com/spf13/cobra"
+	"github.com/yhyj/rolling/function"
 )
 
 // viewCmd represents the view command
