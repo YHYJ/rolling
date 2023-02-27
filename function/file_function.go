@@ -1,20 +1,18 @@
 /*
-File: functions.go
+File: file_function.go
 Author: YJ
 Email: yj1516268@outlook.com
 Created Time: 2023-02-22 14:15:50
 
-Description: 自定义函数
+Description: 执行文件操作的函数
 */
 
 package function
 
 import (
 	"bufio"
-	"bytes"
 	"log"
 	"os"
-	"os/exec"
 	"strings"
 )
 
@@ -84,24 +82,4 @@ func ReadFileCount(file, key string) int {
 		}
 	}
 	return count
-}
-
-// 运行指定命令
-func RunCommand(command, args string) string {
-	// 定义命令
-	cmd := exec.Command(command, args)
-
-	var stdout, stderr bytes.Buffer
-	cmd.Stdout = &stdout // 标准输出
-	cmd.Stderr = &stderr // 标准错误
-
-	// 执行命令获取输出
-	err := cmd.Run()
-	outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
-
-	if err != nil {
-		log.Printf("Run failed with %s", errStr)
-	}
-
-	return strings.TrimRight(outStr, "\n")
 }

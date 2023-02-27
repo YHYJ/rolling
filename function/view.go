@@ -27,7 +27,8 @@ func SystemInfo() {
 	// 获取初始和当前内核版本
 	var keyText = ReadFileKey(fileName, "upgraded linux ")
 	var firstKernel = strings.Split(strings.Split(keyText, " (")[1], " ")[0]
-	var latestKernel = RunCommand("uname", "-r")
+	var unameArgs = []string{"-r"}
+	var latestKernel = RunCommandGetResult("uname", unameArgs)
 
 	// 计算系统安装天数
 	var local, _ = time.LoadLocation("Asia/Shanghai")
@@ -44,7 +45,8 @@ func SystemInfo() {
 	var kernelUpdateMean = float32(systemDays) / float32(kernelUpdateCount)
 
 	// 获取吉祥物
-	var mascot = RunCommand("repo-elephant", "")
+	var repoArgs = []string{""}
+	var mascot = RunCommandGetResult("repo-elephant", repoArgs)
 
 	// 输出
 	fmt.Printf("\033[36m[%16v]\033[0m %-2v \033[36m[%-16v]\033[0m\n", startTimeStr, "--", currentTimeStr)
