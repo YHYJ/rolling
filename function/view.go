@@ -21,7 +21,7 @@ func SystemInfo() {
 
 	// 获取系统安装时间和当前时间
 	var lineText = ReadFileLine(fileName, 1)
-	var startTimeStr = strings.Split(strings.Split(lineText, "[")[1], "]")[0]
+	var startTimeStrTZ = strings.Split(strings.Split(lineText, "[")[1], "]")[0] // 2023-03-10T10:49:09+0800
 	var currentTimeStr = time.Now().Format("2006-01-02 15:04")
 
 	// 获取初始和当前内核版本
@@ -32,7 +32,8 @@ func SystemInfo() {
 
 	// 计算系统安装天数
 	var local, _ = time.LoadLocation("Asia/Shanghai")
-	var startTime, _ = time.ParseInLocation("2006-01-02 15:04", startTimeStr, local)
+	var startTime, _ = time.ParseInLocation("2006-01-02T15:04:05Z0700", startTimeStrTZ, local)
+	var startTimeStr = startTime.Format("2006-01-02 15:04")
 	var startTimeStamp = startTime.Unix()
 	var currentTime, _ = time.ParseInLocation("2006-01-02 15:04", currentTimeStr, local)
 	var currentTimeStamp = currentTime.Unix()
