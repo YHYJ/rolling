@@ -17,14 +17,14 @@ import (
 // viewCmd represents the view command
 var viewCmd = &cobra.Command{
 	Use:   "view",
-	Short: "查看系统信息",
-	Long:  `查看收集到的系统安装和更新信息`,
+	Short: "View system information",
+	Long:  `View the collected system installation and update information.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		function.SystemInfo()
 	},
 }
 
 func init() {
-	viewCmd.Flags().BoolP("help", "h", false, "Help for view")
+	viewCmd.Flags().BoolP("help", "h", false, "help for view")
 	rootCmd.AddCommand(viewCmd)
 }

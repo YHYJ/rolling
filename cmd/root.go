@@ -15,17 +15,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// 在没有任何子命令的情况下调用时的基本命令
 var rootCmd = &cobra.Command{
 	Use:   "rolling",
-	Short: "用于统计输出系统安装和更新信息",
-	Long:  `Rolling是适用于Arch Linux的系统安装和更新信息统计工具`,
+	Short: "For statistics and output system installation and update information",
+	Long:  `Rolling is a system installation and update statistics tool for Arch Linux.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
-// 由main.main调用
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
@@ -35,7 +33,5 @@ func Execute() {
 
 func init() {
 	// 定义全局Flag
-	rootCmd.Flags().BoolP("help", "h", false, "Help for Rolling")
-
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.main.yaml)")
+	rootCmd.Flags().BoolP("help", "h", false, "help for Rolling")
 }

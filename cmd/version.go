@@ -16,11 +16,10 @@ import (
 	"github.com/yhyj/rolling/function"
 )
 
-// versionCmd represents the version command
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "打印程序版本",
-	Long:  `显示版本信息并退出`,
+	Short: "Print program version",
+	Long:  `Print program version and exit.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		programInfo := function.ProgramInfo()
 		fmt.Printf(programInfo)
@@ -28,6 +27,6 @@ var versionCmd = &cobra.Command{
 }
 
 func init() {
-	versionCmd.Flags().BoolP("help", "h", false, "Help for version")
+	versionCmd.Flags().BoolP("help", "h", false, "help for version")
 	rootCmd.AddCommand(versionCmd)
 }
