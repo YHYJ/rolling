@@ -25,8 +25,8 @@ func SystemInfo() {
 	var currentTimeStr = time.Now().Format("2006-01-02 15:04")
 
 	// 获取初始和当前内核版本
-	var keyText = ReadFileKey(fileName, "upgraded linux ")
-	var firstKernel = strings.Split(strings.Split(keyText, " (")[1], " ")[0]
+	var keyText = ReadFileKey(fileName, "installed linux ")
+	var firstKernel = strings.Split(strings.Split(keyText, " (")[1], ")")[0]
 	var unameArgs = []string{"-r"}
 	var latestKernel = RunCommandGetResult("uname", unameArgs)
 
