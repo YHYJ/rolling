@@ -40,7 +40,7 @@ func SystemInfo() {
 	var systemDays = (currentTimeStamp - startTimeStamp) / 86400
 
 	// 获取系统/内核更新相关数据
-	var systemUpdateCount = ReadFileCount(fileName, "starting full system upgrade")
+	var systemUpdateCount = ReadFileCount(fileName, "system_checkupdate.hook")
 	var systemUpdateMean = float32(systemUpdateCount) / float32(systemDays)
 	var kernelUpdateCount = ReadFileCount(fileName, "upgraded linux ")
 	var kernelUpdateMean = float32(systemDays) / float32(kernelUpdateCount)
