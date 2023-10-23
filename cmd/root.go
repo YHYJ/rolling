@@ -18,7 +18,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "rolling",
 	Short: "For statistics and output system installation and update information",
-	Long:  `Rolling is a system installation and update statistics tool for Arch Linux.`,
+	Long:  `rolling is a system installation and update statistics tool for Arch Linux.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
@@ -33,5 +33,5 @@ func Execute() {
 
 func init() {
 	// 定义全局Flag
-	rootCmd.Flags().BoolP("help", "h", false, "help for Rolling")
+	rootCmd.Flags().BoolP("help", "h", false, "help for rolling")
 }
