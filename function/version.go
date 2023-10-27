@@ -12,15 +12,16 @@ package function
 import "fmt"
 
 // 程序信息
-var (
-	name    string = "rolling"
-	version string = "v0.3.8"
+const (
+	Name    = "Rolling"
+	Version = "v0.3.8"
+	Path    = "github.com/yhyj/rolling"
 )
 
 func ProgramInfo(only bool) string {
-	programInfo := fmt.Sprintf("%s\n", version)
+	programInfo := fmt.Sprintf("%s\n", Version)
 	if !only {
-		programInfo = fmt.Sprintf("%s version %s\n", name, version)
+		programInfo = fmt.Sprintf("%s version %s\n", Name, Version)
 	}
 	return programInfo
 }
