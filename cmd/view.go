@@ -11,7 +11,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/yhyj/rolling/function"
+	"github.com/yhyj/rolling/cli"
 )
 
 // viewCmd represents the view command
@@ -20,7 +20,7 @@ var viewCmd = &cobra.Command{
 	Short: "View system information",
 	Long:  `View the collected system installation and update information.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		function.SystemInfo()
+		cli.SystemInfo()
 	},
 }
 

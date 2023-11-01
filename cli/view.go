@@ -7,12 +7,14 @@ Created Time: 2023-02-15 10:24:11
 Description: 子命令`view`功能函数
 */
 
-package function
+package cli
 
 import (
 	"fmt"
 	"strings"
 	"time"
+
+	"github.com/yhyj/rolling/general"
 )
 
 func SystemInfo() {
@@ -20,15 +22,15 @@ func SystemInfo() {
 	var fileName = "/var/log/pacman.log"
 
 	// 获取系统安装时间和当前时间
-	lineText := ReadFileLine(fileName, 1)
+	lineText := general.ReadFileLine(fileName, 0)
 	startTimeStrTZ := strings.Split(strings.Split(lineText, "[")[1], "]")[0] // 2023-03-10T10:49:09+0800
 	currentTimeStr := time.Now().Format("2006-01-02 15:04")
 
 	// 获取初始和当前内核版本
-	keyText := ReadFileKey(fileName, "installed linux ")
+	keyText := general.ReadFileKey(fileName, "installed linux ")
 	firstKernel := strings.Split(strings.Split(keyText, " (")[1], ")")[0]
 	unameArgs := []string{"-r"}
-	latestKernel, err := RunCommandGetResult("uname", unameArgs)
+	latestKernel, err := general.RunCommandGetResult("uname", unameArgs)
 	if err != nil {
 		fmt.Printf("\x1b[31m%s\x1b[0m\n", err)
 	}
@@ -43,14 +45,14 @@ func SystemInfo() {
 	systemDays := (currentTimeStamp - startTimeStamp) / 86400
 
 	// 获取系统/内核更新相关数据
-	systemUpdateCount := ReadFileCount(fileName, "system_checkupdate.hook")
+	systemUpdateCount := general.ReadFileCount(fileName, "system_checkupdate.hook")
 	systemUpdateMean := float32(systemUpdateCount) / float32(systemDays)
-	kernelUpdateCount := ReadFileCount(fileName, "upgraded linux ")
+	kernelUpdateCount := general.ReadFileCount(fileName, "upgraded linux ")
 	kernelUpdateMean := float32(systemDays) / float32(kernelUpdateCount)
 
 	// 获取吉祥物
 	repoArgs := []string{""}
-	mascot, err := RunCommandGetResult("repo-elephant", repoArgs)
+	mascot, err := general.RunCommandGetResult("repo-elephant", repoArgs)
 	if err != nil {
 		fmt.Printf("\x1b[31m%s\x1b[0m\n", err)
 	}

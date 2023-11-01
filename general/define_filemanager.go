@@ -1,5 +1,5 @@
 /*
-File: file_operation.go
+File: define_filemanager.go
 Author: YJ
 Email: yj1516268@outlook.com
 Created Time: 2023-02-22 14:15:50
@@ -7,7 +7,7 @@ Created Time: 2023-02-22 14:15:50
 Description: 执行文件操作的函数
 */
 
-package function
+package general
 
 import (
 	"bufio"

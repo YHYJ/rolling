@@ -13,7 +13,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"github.com/yhyj/rolling/function"
+	"github.com/yhyj/rolling/general"
 )
 
 var versionCmd = &cobra.Command{
@@ -24,7 +24,7 @@ var versionCmd = &cobra.Command{
 		// 解析参数
 		onlyFlag, _ := cmd.Flags().GetBool("only")
 
-		programInfo := function.ProgramInfo(onlyFlag)
+		programInfo := general.ProgramInfo(onlyFlag)
 		fmt.Printf(programInfo)
 	},
 }
