@@ -22,7 +22,7 @@ func SystemInfo() {
 	var fileName = "/var/log/pacman.log"
 
 	// 获取系统安装时间和当前时间
-	lineText := general.ReadFileLine(fileName, 0)
+	lineText := general.ReadFileLine(fileName, 1)
 	startTimeStrTZ := strings.Split(strings.Split(lineText, "[")[1], "]")[0] // 2023-03-10T10:49:09+0800
 	currentTimeStr := time.Now().Format("2006-01-02 15:04")
 
