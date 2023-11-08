@@ -16,7 +16,7 @@ import (
 	"strings"
 )
 
-// 读取文件指定行
+// ReadFileLine 读取文件指定行
 func ReadFileLine(file string, line int) string {
 	// 打开文件
 	text, err := os.Open(file)
@@ -40,7 +40,7 @@ func ReadFileLine(file string, line int) string {
 	return ""
 }
 
-// 读取文件包含指定字符串的行
+// ReadFileKey 读取文件包含指定字符串的行
 func ReadFileKey(file, key string) string {
 	// 打开文件
 	text, err := os.Open(file)
@@ -61,7 +61,7 @@ func ReadFileKey(file, key string) string {
 	return ""
 }
 
-// 获取文件包含指定字符串的行的计数
+// ReadFileCount 获取文件包含指定字符串的行的计数
 func ReadFileCount(file, key string) int {
 	// 打开文件
 	text, err := os.Open(file)

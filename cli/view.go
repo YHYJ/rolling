@@ -17,8 +17,9 @@ import (
 	"github.com/yhyj/rolling/general"
 )
 
+// SystemInfo 获取系统信息
 func SystemInfo() {
-	// 检索的Pacman日志文件
+	// 检索的 Pacman 日志文件
 	var fileName = "/var/log/pacman.log"
 
 	// 获取系统安装时间和当前时间
