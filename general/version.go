@@ -18,7 +18,7 @@ import (
 // 程序信息
 const (
 	Name    string = "Rolling"
-	Version string = "v0.5.4"
+	Version string = "v0.5.5"
 	Project string = "github.com/yhyj/rolling"
 )
 
