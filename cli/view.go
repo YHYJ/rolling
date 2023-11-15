@@ -59,12 +59,15 @@ func SystemInfo() {
 	}
 
 	// 输出
-	fmt.Printf("\033[36m[%16v]\033[0m %-2v \033[36m[%-16v]\033[0m\n", startTimeStr, "--", currentTimeStr)
-	fmt.Printf("\033[35m%18v\033[0m %-2v \033[35m%-18v\033[0m\n", firstKernel, "--", latestKernel)
-	fmt.Printf("\033[37m%12v\033[0m %-2v \033[37m%-4.3v\033[0m \033[34m%v\033[0m\n", "系统使用时长", "--", systemDays, "天")
-	fmt.Printf("\033[37m%12v\033[0m %-2v \033[37m%-4.3v\033[0m \033[34m%v\033[0m\n", "系统更新次数", "--", systemUpdateCount, "次")
-	fmt.Printf("\033[37m%12v\033[0m %-2v \033[37m%-4.3v\033[0m \033[34m%v\033[0m\n", "系统更新频率", "--", systemUpdateMean, "次/天")
-	fmt.Printf("\033[37m%12v\033[0m %-2v \033[37m%-4.3v\033[0m \033[34m%v\033[0m\n", "内核更新次数", "--", kernelUpdateCount, "次")
-	fmt.Printf("\033[37m%12v\033[0m %-2v \033[37m%-4.3v\033[0m \033[34m%v\033[0m\n", "内核更新频率", "--", kernelUpdateMean, "天/次")
+	dataFormat1 := "\x1b[36m[%16v]\x1b[0m %-2v \x1b[36m[%-16v]\x1b[0m\n"
+	dataFormat2 := "\x1b[35m%18v\x1b[0m %-2v \x1b[35m%-18v\x1b[0m\n"
+	dataFormat3 := "\x1b[37m%12v\x1b[0m %-2v \x1b[37m%-4.3v\x1b[0m \x1b[34m%v\x1b[0m\n"
+	fmt.Printf(dataFormat1, startTimeStr, "--", currentTimeStr)
+	fmt.Printf(dataFormat2, firstKernel, "--", latestKernel)
+	fmt.Printf(dataFormat3, "系统使用时长", "--", systemDays, "天")
+	fmt.Printf(dataFormat3, "系统更新次数", "--", systemUpdateCount, "次")
+	fmt.Printf(dataFormat3, "系统更新频率", "--", systemUpdateMean, "次/天")
+	fmt.Printf(dataFormat3, "内核更新次数", "--", kernelUpdateCount, "次")
+	fmt.Printf(dataFormat3, "内核更新频率", "--", kernelUpdateMean, "天/次")
 	fmt.Println(mascot)
 }
