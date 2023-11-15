@@ -33,7 +33,7 @@ func SystemInfo() {
 	unameArgs := []string{"-r"}
 	latestKernel, err := general.RunCommandGetResult("uname", unameArgs)
 	if err != nil {
-		fmt.Printf("\x1b[31m%s\x1b[0m\n", err)
+		fmt.Printf(general.ErrorBaseFormat, err)
 	}
 
 	// 计算系统安装天数
@@ -55,7 +55,7 @@ func SystemInfo() {
 	repoArgs := []string{""}
 	mascot, err := general.RunCommandGetResult("repo-elephant", repoArgs)
 	if err != nil {
-		fmt.Printf("\x1b[31m%s\x1b[0m\n", err)
+		fmt.Printf(general.ErrorBaseFormat, err)
 	}
 
 	// 输出
