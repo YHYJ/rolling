@@ -29,7 +29,7 @@ func SystemInfo() {
 
 	// 获取初始和当前内核版本
 	keyText := general.ReadFileKey(fileName, "installed linux ")
-	firstKernel := strings.Split(strings.Split(keyText, " (")[1], ")")[0]
+	firstKernel := strings.Replace(strings.Split(strings.Split(keyText, " (")[1], ")")[0], ".", "-", -1)
 	unameArgs := []string{"-r"}
 	latestKernel, err := general.RunCommandGetResult("uname", unameArgs)
 	if err != nil {
