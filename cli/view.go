@@ -46,7 +46,7 @@ func SystemInfo() {
 	systemDays := (currentTimeStamp - startTimeStamp) / 86400
 
 	// 获取系统/内核更新相关数据
-	systemUpdateCount := general.ReadFileCount(fileName, "system_checkupdate.hook")
+	systemUpdateCount := general.ReadFileCount(fileName, "starting full system upgrade")
 	systemUpdateMean := float32(systemUpdateCount) / float32(systemDays)
 	kernelUpdateCount := general.ReadFileCount(fileName, "upgraded linux ")
 	kernelUpdateMean := float32(systemDays) / float32(kernelUpdateCount)
