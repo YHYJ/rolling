@@ -4,7 +4,7 @@ Author: YJ
 Email: yj1516268@outlook.com
 Created Time: 2023-02-15 10:24:11
 
-Description: 子命令`view`功能函数
+Description: 子命令 'view' 的实现
 */
 
 package cli

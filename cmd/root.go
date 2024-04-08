@@ -4,7 +4,7 @@ Author: YJ
 Email: yj1516268@outlook.com
 Created Time: 2023-02-17 16:08:19
 
-Description: 程序未带子命令或参数时执行
+Description: 执行程序
 */
 
 package cmd
@@ -15,6 +15,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "rolling",
 	Short: "For statistics and output system installation and update information",

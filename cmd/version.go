@@ -4,7 +4,7 @@ Author: YJ
 Email: yj1516268@outlook.com
 Created Time: 2023-02-17 16:08:20
 
-Description: 由程序子命令 version 执行
+Description: 执行子命令 'version'
 */
 
 package cmd
