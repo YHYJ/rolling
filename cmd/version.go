@@ -14,6 +14,7 @@ import (
 	"github.com/yhyj/rolling/cli"
 )
 
+// versionCmd represents the version command
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print program version",
