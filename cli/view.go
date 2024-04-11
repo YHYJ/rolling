@@ -10,6 +10,7 @@ Description: 子命令 'view' 的实现
 package cli
 
 import (
+	"strconv"
 	"strings"
 	"time"
 
@@ -43,13 +44,22 @@ func SystemInfo() {
 	startTimeStamp := startTime.Unix()
 	currentTime, _ := time.ParseInLocation("2006-01-02 15:04", currentTimeStr, local)
 	currentTimeStamp := currentTime.Unix()
-	systemDays := (currentTimeStamp - startTimeStamp) / 86400
+	systemDays := int((currentTimeStamp - startTimeStamp) / 86400)
 
 	// 获取系统/内核更新相关数据
 	systemUpdateCount := general.ReadFileCount(fileName, "starting full system upgrade")
 	systemUpdateMean := float32(systemUpdateCount) / float32(systemDays)
 	kernelUpdateCount := general.ReadFileCount(fileName, "upgraded linux ")
 	kernelUpdateMean := float32(systemDays) / float32(kernelUpdateCount)
+
+	// 从“系统使用时长”和“系统更新次数”中选出最大值
+	max := func() int {
+		if systemDays > systemUpdateCount {
+			return systemDays
+		}
+		return systemUpdateCount
+	}()
+	length := len(strconv.Itoa(max))
 
 	// 获取吉祥物
 	repoArgs := []string{""}
@@ -63,10 +73,10 @@ func SystemInfo() {
 	dataFormat := "%23v %-2v %-3v %v\n"
 	color.Printf(titleFormat, general.FgCyan("[", startTimeStr, "]"), "--", general.FgCyan("[", currentTimeStr, "]"))
 	color.Printf(titleFormat, general.FgMagenta(firstKernel), "--", general.FgMagenta(latestKernel))
-	color.Printf(dataFormat, general.PrimaryText("系统使用时长"), "--", general.FgYellow(color.Sprintf("%.2v", systemDays)), general.SecondaryText("天"))
-	color.Printf(dataFormat, general.PrimaryText("系统更新次数"), "--", general.FgYellow(color.Sprintf("%.2v", systemUpdateCount)), general.SecondaryText("次"))
-	color.Printf(dataFormat, general.PrimaryText("系统更新频率"), "--", general.FgYellow(color.Sprintf("%.2v", systemUpdateMean)), general.SecondaryText("次/天"))
-	color.Printf(dataFormat, general.PrimaryText("内核更新次数"), "--", general.FgYellow(color.Sprintf("%.2v", kernelUpdateCount)), general.SecondaryText("次"))
-	color.Printf(dataFormat, general.PrimaryText("内核更新频率"), "--", general.FgYellow(color.Sprintf("%.2v", kernelUpdateMean)), general.SecondaryText("天/次"))
+	color.Printf(dataFormat, general.PrimaryText("系统使用时长"), "--", general.FgYellow(color.Sprintf("%-*.2v", length, systemDays)), general.SecondaryText("天"))
+	color.Printf(dataFormat, general.PrimaryText("系统更新次数"), "--", general.FgYellow(color.Sprintf("%-*.2v", length, systemUpdateCount)), general.SecondaryText("次"))
+	color.Printf(dataFormat, general.PrimaryText("系统更新频率"), "--", general.FgYellow(color.Sprintf("%-*.2v", length, systemUpdateMean)), general.SecondaryText("次/天"))
+	color.Printf(dataFormat, general.PrimaryText("内核更新次数"), "--", general.FgYellow(color.Sprintf("%-*.2v", length, kernelUpdateCount)), general.SecondaryText("次"))
+	color.Printf(dataFormat, general.PrimaryText("内核更新频率"), "--", general.FgYellow(color.Sprintf("%-*.2v", length, kernelUpdateMean)), general.SecondaryText("天/次"))
 	color.Println(general.SuccessText(mascot))
 }
