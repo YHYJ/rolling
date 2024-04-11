@@ -71,12 +71,12 @@ func SystemInfo() {
 	// 输出
 	titleFormat := "%27v %-2v %-27v\n"
 	dataFormat := "%23v %-2v %-3v %v\n"
-	color.Printf(titleFormat, general.FgCyan("[", startTimeStr, "]"), "--", general.FgCyan("[", currentTimeStr, "]"))
-	color.Printf(titleFormat, general.FgMagenta(firstKernel), "--", general.FgMagenta(latestKernel))
-	color.Printf(dataFormat, general.PrimaryText("系统使用时长"), "--", general.FgYellow(color.Sprintf("%-*.2v", length, systemDays)), general.SecondaryText("天"))
-	color.Printf(dataFormat, general.PrimaryText("系统更新次数"), "--", general.FgYellow(color.Sprintf("%-*.2v", length, systemUpdateCount)), general.SecondaryText("次"))
-	color.Printf(dataFormat, general.PrimaryText("系统更新频率"), "--", general.FgYellow(color.Sprintf("%-*.2v", length, systemUpdateMean)), general.SecondaryText("次/天"))
-	color.Printf(dataFormat, general.PrimaryText("内核更新次数"), "--", general.FgYellow(color.Sprintf("%-*.2v", length, kernelUpdateCount)), general.SecondaryText("次"))
-	color.Printf(dataFormat, general.PrimaryText("内核更新频率"), "--", general.FgYellow(color.Sprintf("%-*.2v", length, kernelUpdateMean)), general.SecondaryText("天/次"))
+	color.Printf(titleFormat, general.FgCyanText("[", startTimeStr, "]"), "--", general.FgCyanText("[", currentTimeStr, "]"))
+	color.Printf(titleFormat, general.FgMagentaText(firstKernel), "--", general.FgMagentaText(latestKernel))
+	color.Printf(dataFormat, general.PrimaryText("系统使用时长"), "--", general.FgYellowText(color.Sprintf("%-*.2v", length, systemDays)), general.SecondaryText("天"))
+	color.Printf(dataFormat, general.PrimaryText("系统更新次数"), "--", general.FgYellowText(color.Sprintf("%-*.2v", length, systemUpdateCount)), general.SecondaryText("次"))
+	color.Printf(dataFormat, general.PrimaryText("系统更新频率"), "--", general.FgYellowText(color.Sprintf("%-*.2v", length, systemUpdateMean)), general.SecondaryText("次/天"))
+	color.Printf(dataFormat, general.PrimaryText("内核更新次数"), "--", general.FgYellowText(color.Sprintf("%-*.2v", length, kernelUpdateCount)), general.SecondaryText("次"))
+	color.Printf(dataFormat, general.PrimaryText("内核更新频率"), "--", general.FgYellowText(color.Sprintf("%-*.2v", length, kernelUpdateMean)), general.SecondaryText("天/次"))
 	color.Println(general.SuccessText(mascot))
 }
