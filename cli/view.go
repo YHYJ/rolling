@@ -23,36 +23,47 @@ func SystemInfo() {
 	// 检索的 Pacman 日志文件
 	var fileName = "/var/log/pacman.log"
 
-	// 获取系统安装时间和当前时间
-	lineText := general.ReadFileLine(fileName, 1)
-	startTimeStrTZ := strings.Split(strings.Split(lineText, "[")[1], "]")[0] // 2023-03-10T10:49:09+0800
-	currentTimeStr := time.Now().Format("2006-01-02 15:04")
+	// 获取系统时区
+	local, _ := time.LoadLocation("Asia/Shanghai")
 
-	// 获取初始和当前内核版本
-	keyText := general.ReadFileKey(fileName, "installed linux ")
-	firstKernel := strings.Replace(strings.Split(strings.Split(keyText, " (")[1], ")")[0], ".", "-", -1)
+	// 获取系统安装时间
+	lineText := general.ReadFileLine(fileName, 1)                                           // Pacman 日志文件第一行内容，记录有系统安装时间
+	startTimeStrTZ := strings.Split(strings.Split(lineText, "[")[1], "]")[0]                // 从日志文件中截取 2023-03-10T10:49:09+0800 格式的时间字符串
+	startTime, _ := time.ParseInLocation("2006-01-02T15:04:05Z0700", startTimeStrTZ, local) // 解析日志文件中截取的时间字符串
+	startTimeStr := startTime.Format("2006-01-02 15:04")                                    // 格式化时间
+
+	// 获取当前时间
+	currentTimeStr := time.Now().Format("2006-01-02 15:04") // 当前时间
+
+	// 获取初始内核版本
+	keyText := general.ReadFileKey(fileName, "installed linux ")                                         // Pacman 日志文件中记录有初始内核版本的行
+	firstKernel := strings.Replace(strings.Split(strings.Split(keyText, " (")[1], ")")[0], ".", "-", -1) // 初始内核版本
+
+	// 获取当前内核版本
 	unameArgs := []string{"-r"}
-	latestKernel, err := general.RunCommandGetResult("uname", unameArgs)
+	latestKernel, err := general.RunCommandGetResult("uname", unameArgs) // 当前内核版本
 	if err != nil {
 		color.Error.Println(err)
 	}
 
 	// 计算系统安装天数
-	local, _ := time.LoadLocation("Asia/Shanghai")
-	startTime, _ := time.ParseInLocation("2006-01-02T15:04:05Z0700", startTimeStrTZ, local)
-	startTimeStr := startTime.Format("2006-01-02 15:04")
 	startTimeStamp := startTime.Unix()
 	currentTime, _ := time.ParseInLocation("2006-01-02 15:04", currentTimeStr, local)
 	currentTimeStamp := currentTime.Unix()
-	systemDays := int((currentTimeStamp - startTimeStamp) / 86400)
+	systemDays := int((currentTimeStamp - startTimeStamp) / 86400) // 系统安装天数
 
-	// 获取系统/内核更新相关数据
-	systemUpdateCount := general.ReadFileCount(fileName, "starting full system upgrade")
-	systemUpdateMean := float32(systemUpdateCount) / float32(systemDays)
-	kernelUpdateCount := general.ReadFileCount(fileName, "upgraded linux ")
-	kernelUpdateMean := float32(systemDays) / float32(kernelUpdateCount)
+	// 获取系统更新相关数据
+	systemUpdateCount, err := general.GetSystemUpdateCount(fileName) // 系统更新次数
+	if err != nil {
+		color.Error.Println(err)
+	}
+	systemUpdateMean := float32(systemUpdateCount) / float32(systemDays)                 // 系统更新频率
 
-	// 从“系统使用时长”和“系统更新次数”中选出最大值
+	// 获取内核更新相关数据
+	kernelUpdateCount := general.ReadFileCount(fileName, "upgraded linux ") // 内核更新次数
+	kernelUpdateMean := float32(systemDays) / float32(kernelUpdateCount)    // 内核更新频率
+
+	// 从 systemDays 和 systemUpdateCount 中选出最大值作为缩进长度
 	max := func() int {
 		if systemDays > systemUpdateCount {
 			return systemDays
