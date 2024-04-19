@@ -57,7 +57,7 @@ func SystemInfo() {
 	if err != nil {
 		color.Error.Println(err)
 	}
-	systemUpdateMean := float32(systemUpdateCount) / float32(systemDays)                 // 系统更新频率
+	systemUpdateMean := float32(systemUpdateCount) / float32(systemDays) // 系统更新频率
 
 	// 获取内核更新相关数据
 	kernelUpdateCount := general.ReadFileCount(fileName, "upgraded linux ") // 内核更新次数
