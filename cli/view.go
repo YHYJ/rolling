@@ -10,7 +10,6 @@ Description: 子命令 'view' 的实现
 package cli
 
 import (
-	"strconv"
 	"strings"
 	"time"
 
@@ -22,6 +21,9 @@ import (
 func SystemInfo() {
 	// 检索的 Pacman 日志文件
 	var fileName = "/var/log/pacman.log"
+
+	// 最终输出数据小数点后保留的位数
+	var precision = 2
 
 	// 获取系统时区
 	local, _ := time.LoadLocation("Asia/Shanghai")
@@ -63,14 +65,13 @@ func SystemInfo() {
 	kernelUpdateCount := general.ReadFileCount(fileName, "upgraded linux ") // 内核更新次数
 	kernelUpdateMean := float32(systemDays) / float32(kernelUpdateCount)    // 内核更新频率
 
+	// float32 类型数据保留2位小数
+	systemUpdateMean, kernelUpdateMean = general.RoundFloat32(systemUpdateMean, precision), general.RoundFloat32(kernelUpdateMean, precision)
+
 	// 从 systemDays 和 systemUpdateCount 中选出最大值作为缩进长度
-	max := func() int {
-		if systemDays > systemUpdateCount {
-			return systemDays
-		}
-		return systemUpdateCount
-	}()
-	length := len(strconv.Itoa(max))
+	member := make([]interface{}, 0, 5)
+	member = append(member, systemDays, systemUpdateCount, systemUpdateMean, kernelUpdateCount, kernelUpdateMean)
+	length := general.FindFakeMaxLength(member)
 
 	// 获取吉祥物
 	repoArgs := []string{""}
@@ -81,13 +82,43 @@ func SystemInfo() {
 
 	// 输出
 	titleFormat := "%27v %-2v %-27v\n"
-	dataFormat := "%23v %-2v %-3v %v\n"
+	dataFormat := "%23v %-2v %v %v\n"
 	color.Printf(titleFormat, general.FgCyanText("[", startTimeStr, "]"), "--", general.FgCyanText("[", currentTimeStr, "]"))
 	color.Printf(titleFormat, general.FgMagentaText(firstKernel), "--", general.FgMagentaText(latestKernel))
-	color.Printf(dataFormat, general.PrimaryText("系统使用时长"), "--", general.FgYellowText(color.Sprintf("%-*.2v", length, systemDays)), general.SecondaryText("天"))
-	color.Printf(dataFormat, general.PrimaryText("系统更新次数"), "--", general.FgYellowText(color.Sprintf("%-*.2v", length, systemUpdateCount)), general.SecondaryText("次"))
-	color.Printf(dataFormat, general.PrimaryText("系统更新频率"), "--", general.FgYellowText(color.Sprintf("%-*.2v", length, systemUpdateMean)), general.SecondaryText("次/天"))
-	color.Printf(dataFormat, general.PrimaryText("内核更新次数"), "--", general.FgYellowText(color.Sprintf("%-*.2v", length, kernelUpdateCount)), general.SecondaryText("次"))
-	color.Printf(dataFormat, general.PrimaryText("内核更新频率"), "--", general.FgYellowText(color.Sprintf("%-*.2v", length, kernelUpdateMean)), general.SecondaryText("天/次"))
+	color.Printf(
+		dataFormat,
+		general.PrimaryText("系统使用时长"),
+		"--",
+		general.FgYellowText(color.Sprintf("%-*.*v", length, precision+1, systemDays)),
+		general.SecondaryText("天"),
+	)
+	color.Printf(
+		dataFormat,
+		general.PrimaryText("系统更新次数"),
+		"--",
+		general.FgYellowText(color.Sprintf("%-*.*v", length, precision+1, systemUpdateCount)),
+		general.SecondaryText("次"),
+	)
+	color.Printf(
+		dataFormat,
+		general.PrimaryText("系统更新频率"),
+		"--",
+		general.FgYellowText(color.Sprintf("%-*.*v", length, precision+1, systemUpdateMean)),
+		general.SecondaryText("次/天"),
+	)
+	color.Printf(
+		dataFormat,
+		general.PrimaryText("内核更新次数"),
+		"--",
+		general.FgYellowText(color.Sprintf("%-*.*v", length, precision+1, kernelUpdateCount)),
+		general.SecondaryText("次"),
+	)
+	color.Printf(
+		dataFormat,
+		general.PrimaryText("内核更新频率"),
+		"--",
+		general.FgYellowText(color.Sprintf("%-*.*v", length, precision+1, kernelUpdateMean)),
+		general.SecondaryText("天/次"),
+	)
 	color.Println(general.SuccessText(mascot))
 }
