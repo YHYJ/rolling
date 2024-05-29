@@ -45,7 +45,7 @@ func SystemInfo() {
 	unameArgs := []string{"-r"}
 	latestKernel, err := general.RunCommandGetResult("uname", unameArgs) // 当前内核版本
 	if err != nil {
-		color.Error.Println(err)
+		color.Danger.Println(err)
 	}
 
 	// 计算系统安装天数
@@ -57,7 +57,7 @@ func SystemInfo() {
 	// 获取系统更新相关数据
 	systemUpdateCount, err := general.GetSystemUpdateCount(fileName) // 系统更新次数
 	if err != nil {
-		color.Error.Println(err)
+		color.Danger.Println(err)
 	}
 	systemUpdateMean := float32(systemUpdateCount) / float32(systemDays) // 系统更新频率
 
@@ -77,7 +77,7 @@ func SystemInfo() {
 	repoArgs := []string{""}
 	mascot, err := general.RunCommandGetResult("repo-elephant", repoArgs)
 	if err != nil {
-		color.Error.Println(err)
+		color.Danger.Println(err)
 	}
 
 	// 输出
