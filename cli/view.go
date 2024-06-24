@@ -46,7 +46,7 @@ func SystemInfo() {
 	latestKernel, err := general.RunCommandGetResult("uname", unameArgs) // 当前内核版本
 	if err != nil {
 		fileName, lineNo := general.GetCallerInfo()
-		color.Danger.Printf("Get current kernel version error (%s:%d): %s\n", fileName, lineNo+1, err)
+		color.Printf("%s %s -> Unable to get current kernel version: %s\n", general.DangerText("Error:"), general.SecondaryText("[", fileName, ":", lineNo+1, "]"), err)
 	}
 
 	// 计算系统安装天数
@@ -59,7 +59,7 @@ func SystemInfo() {
 	systemUpdateCount, err := general.GetSystemUpdateCount(fileName) // 系统更新次数
 	if err != nil {
 		fileName, lineNo := general.GetCallerInfo()
-		color.Danger.Printf("Get system update info error (%s:%d): %s\n", fileName, lineNo+1, err)
+		color.Printf("%s %s -> Unable to get system update info: %s\n", general.DangerText("Error:"), general.SecondaryText("[", fileName, ":", lineNo+1, "]"), err)
 	}
 	systemUpdateMean := float32(systemUpdateCount) / float32(systemDays) // 系统更新频率
 
@@ -80,7 +80,7 @@ func SystemInfo() {
 	mascot, err := general.RunCommandGetResult("repo-elephant", repoArgs)
 	if err != nil {
 		fileName, lineNo := general.GetCallerInfo()
-		color.Danger.Printf("Get mascot error (%s:%d): %s\n", fileName, lineNo+1, err)
+		color.Printf("%s %s -> Unable to get mascot: %s\n", general.DangerText("Error:"), general.SecondaryText("[", fileName, ":", lineNo+1, "]"), err)
 	}
 
 	// 输出
