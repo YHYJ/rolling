@@ -43,7 +43,7 @@ func SystemInfo() {
 
 	// 获取当前内核版本
 	unameArgs := []string{"-r"}
-	latestKernel, err := general.RunCommandGetResult("uname", unameArgs) // 当前内核版本
+	latestKernel, _, err := general.RunCommandToBuffer("uname", unameArgs) // 当前内核版本
 	if err != nil {
 		fileName, lineNo := general.GetCallerInfo()
 		color.Printf("%s %s -> Unable to get current kernel version: %s\n", general.DangerText("Error:"), general.SecondaryText("[", fileName, ":", lineNo+1, "]"), err)
@@ -77,7 +77,7 @@ func SystemInfo() {
 
 	// 获取吉祥物
 	repoArgs := []string{""}
-	mascot, err := general.RunCommandGetResult("repo-elephant", repoArgs)
+	mascot, _, err := general.RunCommandToBuffer("repo-elephant", repoArgs)
 	if err != nil {
 		fileName, lineNo := general.GetCallerInfo()
 		color.Printf("%s %s -> Unable to get mascot: %s\n", general.DangerText("Error:"), general.SecondaryText("[", fileName, ":", lineNo+1, "]"), err)
