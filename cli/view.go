@@ -38,8 +38,8 @@ func SystemInfo() {
 	currentTimeStr := time.Now().Format("2006-01-02 15:04") // 当前时间
 
 	// 获取初始内核版本
-	keyText := general.ReadFileKey(fileName, "installed linux ")                                         // Pacman 日志文件中记录有初始内核版本的行
-	firstKernel := strings.Replace(strings.Split(strings.Split(keyText, " (")[1], ")")[0], ".", "-", -1) // 初始内核版本
+	keyText := general.ReadFileKey(fileName, "installed linux ")                                        // Pacman 日志文件中记录有初始内核版本的行
+	firstKernel := strings.ReplaceAll(strings.Split(strings.Split(keyText, " (")[1], ")")[0], ".", "-") // 初始内核版本
 
 	// 获取当前内核版本
 	unameArgs := []string{"-r"}
@@ -71,7 +71,7 @@ func SystemInfo() {
 	systemUpdateMean, kernelUpdateMean = general.RoundFloat32(systemUpdateMean, precision), general.RoundFloat32(kernelUpdateMean, precision)
 
 	// 从 systemDays 和 systemUpdateCount 中选出最大值作为缩进长度
-	member := make([]interface{}, 0, 5)
+	member := make([]any, 0, 5)
 	member = append(member, systemDays, systemUpdateCount, systemUpdateMean, kernelUpdateCount, kernelUpdateMean)
 	length := general.FindFakeMaxLength(member)
 

@@ -34,7 +34,7 @@ func RoundFloat32(number float32, precision int) float32 {
 //
 // 返回：
 //   - 最长长度
-func FindFakeMaxLength(numbers []interface{}) int {
+func FindFakeMaxLength(numbers []any) int {
 	maxLength := 0
 
 	for _, num := range numbers {
