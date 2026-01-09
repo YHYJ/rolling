@@ -61,13 +61,19 @@ func SystemInfo() {
 		fileName, lineNo := general.GetCallerInfo()
 		color.Printf("%s %s %s\n", general.DangerText(general.ErrorInfoFlag), general.SecondaryText("[", fileName, ":", lineNo+1, "]"), err)
 	}
-	systemUpdateMean := float32(systemUpdateCount) / float32(systemDays) // 系统更新频率
+	systemUpdateMean := float32(0) // 系统更新频率
+	if systemDays > 0 && systemUpdateCount > 0 {
+		systemUpdateMean = float32(systemUpdateCount) / float32(systemDays)
+	}
 
 	// 获取内核更新相关数据
 	kernelUpdateCount := general.ReadFileCount(fileName, "upgraded linux ") // 内核更新次数
-	kernelUpdateMean := float32(systemDays) / float32(kernelUpdateCount)    // 内核更新频率
+	kernelUpdateMean := float32(0)                                          // 内核更新频率
+	if systemDays > 0 && kernelUpdateCount > 0 {
+		kernelUpdateMean = float32(systemDays) / float32(kernelUpdateCount)
+	}
 
-	// float32 类型数据保留2位小数
+	// float32 类型数据保留的小数位
 	systemUpdateMean, kernelUpdateMean = general.RoundFloat32(systemUpdateMean, precision), general.RoundFloat32(kernelUpdateMean, precision)
 
 	// 从 systemDays 和 systemUpdateCount 中选出最大值作为缩进长度
